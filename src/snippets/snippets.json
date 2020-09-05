@@ -7,7 +7,7 @@
             "var morgan = require('morgan');\r\n",
             "var bodyParser = require('body-parser');\r\n",
             "\r\n",
-            "const route = require('./Routes/index.js);'\r\n",
+            "const route = require('./Routes/index.js');\r\n",
             "\r\n",
             "const app = express();\r\n",
             "\r\n",
