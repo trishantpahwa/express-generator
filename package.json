@@ -1,8 +1,13 @@
 {
 	"name": "express-generator",
+	"publisher": "TrishantPahwa",
 	"displayName": "express-generator",
 	"description": "A generator for express",
 	"version": "0.0.1",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/trishantpahwa/express-generator.git"
+	},
 	"engines": {
 		"vscode": "^1.48.0"
 	},
