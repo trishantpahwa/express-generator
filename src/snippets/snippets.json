@@ -1,0 +1,71 @@
+{
+    "app": {
+        "prefix": "index.js",
+        "body": [
+            "const express = require('express');\r\n",
+            "var cors = require('cors');\r\n",
+            "var morgan = require('morgan');\r\n",
+            "var bodyParser = require('body-parser');\r\n",
+            "\r\n",
+            "const route = require('./Routes/index.js);'\r\n",
+            "\r\n",
+            "const app = express();\r\n",
+            "\r\n",
+            "app.use(cors());\r\n",
+            "app.use(morgan('tiny'));\r\n",
+            "app.use(bodyParser.json());\r\n",
+            "app.use(bodyParser.urlencoded({ extended: true }));\r\n",
+            "\r\n",
+            "app.use('/', route);\r\n",
+            "\r\n",
+            "app.listen(process.env.PORT || 3000, function() {\r\n",
+            "\tconsole.log('Express app running on port ' + (process.env.PORT || 3000))\r\n",
+            "});"
+        ],
+        "description": "index.js snippet"
+    },
+    "routes": {
+        "prefix": "routes.index.js",
+        "body": [
+            "const express = require('express');\r\n",
+            "\r\n",
+            "const model = require('../Models/index.js');\r\n",
+            "\r\n",
+            "const router = express.Router();\r\n",
+            "\r\n",
+            "router.get('/', function(req, res) {\r\n",
+            "\r\n",
+            "});\r\n",
+            "\r\n",
+            "module.exports = router;"
+        ],
+        "description": "A snippet for routes."
+    },
+    "models": {
+        "prefix": "models.index.js",
+        "body": [
+            "class model {\r\n",
+            "\tconstructor() {\r\n",
+            "\t\t\r\n",
+            "\t}\r\n",
+            "\t\r\n",
+            "\tcreate() {\r\n",
+            "\t\t\r\n",
+            "\t}\r\n",
+            "\tread() {\r\n",
+            "\t\t\r\n",
+            "\t}\r\n",
+            "\tupdate() {\r\n",
+            "\t\t\r\n",
+            "\t}\r\n",
+            "\tdelete() {\r\n",
+            "\t\t\r\n",
+            "\t}\r\n",
+            "\t\r\n",
+            "}\r\n",
+            "\r\n",
+            "module.exports = model;"
+        ],
+        "description": "A snippet for models."
+    }
+}
