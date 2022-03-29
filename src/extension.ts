@@ -19,32 +19,42 @@ export function activate(context: vscode.ExtensionContext) {
 	let disposable = vscode.commands.registerCommand('express-generator.generate-express', () => {
 		// The code you place here will be executed every time your command is executed
 		const _path = vscode.workspace.rootPath;
-		const snippets = JSON.parse(fs.readFileSync(__dirname + '/snippets/snippets.json').toString());
-		function addSnippet(snippetType: string) {
-			return snippets[snippetType].body.join('');
-		}
-		fs.mkdirSync(_path + '/src');
-		fs.writeFileSync(_path + '/src/index.js', addSnippet('app'));
-		fs.mkdirSync(_path + '/src/Models');
-		fs.writeFileSync(_path + '/src/Models/index.js', addSnippet('models'));
-		fs.mkdirSync(_path + '/src/Routes');
-		fs.writeFileSync(_path + '/src/Routes/index.js', addSnippet('routes'));
-		fs.mkdirSync(_path + '/tests');
-		vscode.workspace.openTextDocument(_path + '/src/index.js').then(function(doc: any) {
-			vscode.window.showTextDocument(doc);
-		});
-		cp.exec('npm i -S express cors body-parser morgan --prefix ' + _path, function(err, stdout, stderr) {
-			if(err) {
-				vscode.window.showInformationMessage('Unable to install packages.');
-			} else {
-				vscode.window.showInformationMessage('Installed packages.');
+		if (_path) {
+			const snippets = JSON.parse(fs.readFileSync(__dirname + '/snippets/snippets.json').toString());
+			function addSnippet(snippetType: string) {
+				return snippets[snippetType].body.join('');
 			}
-		});
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Generated express app.');
+			fs.mkdirSync(_path + '/src');
+			fs.writeFileSync(_path + '/src/index.js', addSnippet('app'));
+			fs.mkdirSync(_path + '/src/models');
+			fs.writeFileSync(_path + '/src/models/index.js', addSnippet('models'));
+			fs.mkdirSync(_path + '/src/routes');
+			fs.writeFileSync(_path + '/src/routes/index.js', addSnippet('routes'));
+			fs.mkdirSync(_path + '/src/controllers');
+			fs.writeFileSync(_path + '/src/controllers/index.js', addSnippet('controllers'));
+			fs.mkdirSync(_path + '/src/services');
+			fs.writeFileSync(_path + '/src/services/index.js', addSnippet('servicesIndex'));
+			fs.writeFileSync(_path + '/src/services/my.service.js', addSnippet('myService'));
+			fs.mkdirSync(_path + '/tests');
+			vscode.workspace.openTextDocument(_path + '/src/index.js').then(function (doc: any) {
+				vscode.window.showTextDocument(doc);
+			});
+			cp.exec('npm i -S express cors body-parser morgan --prefix ' + _path, function (err, stdout, stderr) {
+				if (err) {
+					vscode.window.showInformationMessage('Unable to install packages.');
+				} else {
+					vscode.window.showInformationMessage('Installed packages.');
+				}
+			});
+			// Display a message box to the user
+			vscode.window.showInformationMessage('Generated express app.');
+		} else {
+
+			vscode.window.showErrorMessage('Open a folder in workspace to generate express app in.');
+		}
 	});
 	context.subscriptions.push(disposable);
 }
 
 // this method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate() { }
